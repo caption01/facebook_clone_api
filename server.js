@@ -6,6 +6,7 @@ const cors          =   require('cors');
 const User          =   require('./service/User')
 const Post          =   require('./service/post')
 const Comments      =   require('./service/Comments')
+const LikeCount      =   require('./service/LikeCount')
 const PORT          =   3000;
 
 const app = express();
@@ -18,6 +19,7 @@ db.sequelize.sync({force: false}).then(() => {
     User(app, db)    
     Post(app, db)    
     Comments(app, db)
+    LikeCount(app, db)
  
     app.listen(PORT, ()=>{
         console.log(`server is running at ${PORT}`)

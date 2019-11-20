@@ -1,9 +1,5 @@
 module.exports = (sequelize, DataType) => {
 
-    const Post = require('./post')
-    const Comments = require('./comment')
-
-
     const User = sequelize.define('user', {
         user_id: {
             type: DataType.INTEGER(10),
@@ -19,6 +15,10 @@ module.exports = (sequelize, DataType) => {
         user_password: {
             type: DataType.STRING,
             allowNull: false
+        },
+        user_profile: {
+            type: DataType.STRING,
+            allowNull: false
         }
     },{
         freezeTableName: true,
@@ -28,8 +28,8 @@ module.exports = (sequelize, DataType) => {
     User.associate = (models) => {
         User.hasMany(models.post)
         User.hasMany(models.comment)
+        User.hasMany(models.like)
     }
-
     
 
     return User

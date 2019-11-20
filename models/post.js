@@ -1,8 +1,5 @@
 module.exports = (sequelize, Datatype) => {
 
-    const User = require('./user')
-    const Comments = require('./comment')
-
     const Post = sequelize.define('post', {
         post_id : {
             type: Datatype.INTEGER(10),
@@ -15,19 +12,21 @@ module.exports = (sequelize, Datatype) => {
             type: Datatype.STRING,
             allowNull: true
         },
-        image_text : {
+        image_content : {
             type: Datatype.TEXT,
             allowNull: true
         },
-        text : {
+        text_content : {
             type: Datatype.TEXT,
-            allowNull: true
+            allowNull: false
         }
     })
 
+
     Post.associate = (models) => {
-        Post.belongsTo(models.user)
+        Post.belongsTo(models.user, {foreignKey: {allowNull: false  }})
         Post.hasMany(models.comment)
+        Post.hasMany(models.like)
     }
 
     

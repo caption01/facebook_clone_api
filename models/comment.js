@@ -1,9 +1,5 @@
 module.exports = (sequelize, Datatype) => {
 
-    const Post = require('./post')
-    const User = require('./user')
-
-
     const Comments = sequelize.define('comment', {
         comment_id : {
             type: Datatype.INTEGER(10),
@@ -27,8 +23,8 @@ module.exports = (sequelize, Datatype) => {
     })
 
     Comments.associate = (models) => {
-        Comments.belongsTo(models.user)
-        Comments.belongsTo(models.post)
+        Comments.belongsTo(models.user, {foreignKey: { allowNull: false }})
+        Comments.belongsTo(models.post, {foreignKey: { allowNull: false }})
     }
 
     return Comments
